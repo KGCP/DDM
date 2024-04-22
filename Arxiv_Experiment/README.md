@@ -1,3 +1,5 @@
+![Experiment_Pipeline](docs/Experiment_Pipeline.png)
+
 # Arxiv Experiment
 
 This repository contains the experiment for our Arxiv research project titled "ASKG: An Approach to Enrich Scholarly Knowledge Graphs"
