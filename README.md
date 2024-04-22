@@ -1,4 +1,4 @@
-![DDM_Pipeline](docs/DDM Pipeline.png)
+![DDM_Pipeline](docs/DDM_Pipeline.png)
 
 # Deep Document Model (DDM)
 
