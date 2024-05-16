@@ -4,7 +4,7 @@
 
 This repository contains the experiment for our Arxiv research project titled "ASKG: An Approach to Enrich Scholarly Knowledge Graphs"
 
-# Simple Chunking - Benchmark Experiment
+## Simple Chunking - Benchmark Experiment
 1.Data Preprocessing:
 Dataset composition: Ten scientific articles were selected as the dataset.
 Chunking: A simple chunking approach was employed, with a maximum of 100 tokens per chunk and a 5% overlap ratio.
@@ -18,7 +18,7 @@ The cosine similarity between each text chunk and the query was computed. The to
 4.Query Answering:
 The selected text chunks were used as context, and the Llama2 model was employed to answer user queries solely based on the selected context, without using any external data.
 
-# Knowledge Graph Approach
+## Knowledge Graph-enhanced Query Processing (KGQP)
 1.Knowledge Graph Construction:
 
 The PARSE+DDM method was used to create a knowledge graph (.ttl file) from the ten scientific articles, containing information derived from the decomposed articles.
@@ -59,3 +59,59 @@ Human Evaluation: Experts or users were invited to score the answers generated b
 The evaluation results of the Benchmark and KG experiments were compared to analyze the impact of introducing the knowledge graph on the QA performance.
 The effectiveness of the KG-based extension steps in the KG experiment was analyzed, exploring the role and value of knowledge graphs in QA tasks.
 The advantages, limitations, and future improvement directions of the experiments were summarized.
+
+## Evaluation
+
+We employed two evaluation methods: embedding distance evaluation and human evaluation. In the embedding distance evaluation, we used GIST-Embedding to compare the paragraphs obtained in the Benchmark experiment and the KG experiment and calculated the semantic distance between them. A smaller distance indicates that the paragraphs selected by the KG experiment are more similar to the results of the Benchmark experiment.
+
+### Embedding Distance Analysis
+
+We first analyze the performance of the KG experiment and the Benchmark experiment in terms of Embedding Distance. The results are shown in the following table:
+
+| Question | Benchmark | KG |
+|----------|-----------|----|
+| Q1       | 0.7188    | 0.8381 |
+| Q2       | 0.6852    | 0.7852 |
+| Q3       | 0.7808    | 0.6850 |
+| Q4       | 0.9121    | 0.7912 |
+| Q5       | 0.6847    | 0.8079 |
+
+The KG experiment achieves higher embedding similarity with the user query compared to the Benchmark experiment in 4 out of 5 questions. The average improvement of the KG experiment over the Benchmark experiment is 12.7\%. This indicates that by incorporating knowledge graph information, the question answering system can select more relevant context paragraphs, leading to generated answers that better match the user's query intent.
+
+### Human Evaluation Analysis
+
+Next, we compare the human evaluation scores of the two experiments across four dimensions: Relevance, Accuracy, Completeness, and Readability. The results are presented in the following table:
+
+| Answer        | Author 1  | Author 2  | LLM   |
+|---------------|-----------|-----------|-------|
+| Q1 Benchmark  | 2,3,3,4   | 3,3,3,3   | 4,4,3,3 |
+| Q1 KGQP       | 2,3,3,4   | 3,3,3,3   | 4,4,3,3 |
+| Q2 Benchmark  | 4,4,4,4   | 4,4,4,5   | 4,4,3,4 |
+| Q2 KGQP       | 4,4,4,4   | 4,4,4,5   | 4,4,3,5 |
+| Q3 Benchmark  | 4,4,2,4   | 4,3,3,4   | 3,3,2,3 |
+| Q3 KGQP       | 4,4,4,4   | 4,4,4,5   | 5,4,5,5 |
+| Q4 Benchmark  | 4,3,2,4   | 4,3,3,4   | 5,4,4,5 |
+| Q4 KGQP       | 4,4,3,4   | 4,4,4,4   | 5,4,4,5 |
+| Q5 Benchmark  | 3,3,3,4   | 3,4,3,5   | 5,4,4,5 |
+| Q5 KGQP       | 3,4,3,4   | 3,3,3,4   | 5,4,5,5 |
+
+The human evaluation scores show that the KG experiment outperforms the Benchmark experiment in almost all dimensions across the five questions. Specifically, the KG experiment achieves an average Relevance score of 3.65, compared to 3.45 for the Benchmark experiment, an improvement of 5.8%. In terms of Accuracy, the KG experiment scores 3.85 on average, while the Benchmark experiment scores 3.70, an improvement of 4.1%. For Completeness, the KG experiment obtains an average score of 4.20, outperforming the Benchmark experiment's 3.85 by 9.1%. Finally, the KG experiment also shows superior Readability with an average score of 4.35, compared to 4.00 for the Benchmark experiment, an improvement of 8.8%.
+
+These human evaluation results provide strong evidence that incorporating knowledge graph information enhances the quality of generated answers in multiple aspects. The structured knowledge captured in the knowledge graph allows the question answering system to produce more relevant, accurate, complete, and readable responses to user queries.
+
+### Answer Entity Comparison
+
+Lastly, we examine the entity-related metrics of the generated answers from both experiments. The results are presented in the following table:
+
+| Question | Overlap Entity Ratio | Jaccard Distance |
+|----------|----------------------|------------------|
+| Q1       | 0.0833               | 0.9545           |
+| Q2       | 0.0625               | 0.9630           |
+| Q3       | 0.1304               | 0.8966           |
+| Q4       | 0.1875               | 0.8750           |
+| Q5       | 0.3478               | 0.7391           |
+
+The results in the table reveal that the answers generated by the KG experiment and the Benchmark experiment have relatively low entity overlap ratios, ranging from 0.0625 to 0.3478. Correspondingly, the Jaccard distances between the two sets of answers are quite high, with values above 0.7 for all questions. This observation suggests that the KG experiment, by leveraging the entity information stored in the knowledge graph, can generate answers with a significantly different set of entities compared to the Benchmark experiment. The integration of knowledge graph enables the question answering system to identify and include more relevant and diverse entities in the generated responses, providing additional informative details to better address user queries.
+
+
+In conclusion, this study demonstrates the significant potential of integrating knowledge graphs into question answering systems. The experimental results provide strong evidence that leveraging the structured knowledge captured in knowledge graphs can substantially enhance the relevance, accuracy, completeness, and diversity of generated answers. The proposed approach offers a promising direction for developing more intelligent and effective question answering systems that can better understand and satisfy user information needs.
