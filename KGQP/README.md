@@ -1,8 +1,8 @@
 ![Experiment_Pipeline](docs/Experiment_Pipeline.png)
 
-# Arxiv Experiment
+# Knowledge Graph-enhanced Query Processing (KGQP)
 
-This repository contains the experiment for our Arxiv research project titled "ASKG: An Approach to Enrich Scholarly Knowledge Graphs"
+This repository contains the experiment for KGQP process in our arXiv research paper titled "Leveraging Large Language Models for Semantic Query Processing in a Scholarly Knowledge Graph"
 
 ## Simple Chunking - Benchmark Experiment
 
