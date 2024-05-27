@@ -1,5 +1,10 @@
 ![Experiment_Pipeline](docs/Experiment_Pipeline.png)
 
+# Published Paper
+Some of the content in this project has been adapted into an arXiv paper. 
+Here is the link to our paper titled "Leveraging Large Language Models for Semantic Query Processing in a Scholarly Knowledge Graph" published on arXiv: [arXiv:2405.15374](https://arxiv.org/abs/2405.15374)
+
+
 # Knowledge Graph-enhanced Query Processing (KGQP)
 
 This repository contains the experiment for KGQP process in our arXiv research paper titled "Leveraging Large Language Models for Semantic Query Processing in a Scholarly Knowledge Graph"
