@@ -2,18 +2,18 @@
 
 # Deep Document Model (DDM)
 
-This repository contains the code for our research project titled "ASKG: An Approach to Enrich Scholarly Knowledge Graphs through Paper Decomposition". Our project's primary focus is to expand the academic knowledge graph automatically by extracting fine-grained knowledge from academic papers, particularly those related to computer science.
+This repository contains the code related to the *Deep Document Model* (**DDM**) implementation in the *Academic Scholarly Knowledge Graph* (**ASKG**) project.  It aims to investigate an approach to enrich scholarly knowledge graphs through paper decomposition. Our project's primary focus is to expand ASKG automatically by extracting fine-grained knowledge from academic papers, particularly those related to computer science.
 
 ## DDM Pipeline
 
 The pipeline graph shows the entire DDM construction process: 
 
-1. Converting PDF files to HTML format
-2. Extracting headings from the HTML and constructing an XML representation of the document structure
-3. Extracting textual content from the PDF and splitting it into sentences
-4. Aligning sentences with the corresponding section information from the XML structure
-5. Embedding references within the sentences
-6. Generating the final DDM XML representation
+1. Converting PDF files to HTML format.
+2. Extracting headings from the HTML and constructing an XML representation of the document structure.
+3. Extracting textual content from the PDF and splitting it into sentences.
+4. Aligning sentences with the corresponding section information from the XML structure.
+5. Embedding references within the sentences.
+6. Generating the final DDM XML representation.
 
 Initially, the academic document is transitioned from PDF to HTML format using the PDFtoHTML tool, facilitating the extraction of its hierarchical heading structure. This is subsequently integrated with the outcomes derived from the MEL Document Structure and the original PDF document, culminating in the formation of the Deep Document Model. The process commences with the extraction of content from the PDF file, segmenting it into individual sentences. These sentences are then meticulously aligned with the headings obtained from the XML document, ensuring their accurate placement within the appropriate sections. The model functions at various levels of granularity, encompassing sections, paragraphs, and singular sentences. It also identifies any references as specific embeddings linked to those sentences. Ultimately, the XML document is converted into RDF, thereby enriching the Scholarly Knowledge Graph. This enrichment paves the way for additional applications, notably facilitating interactions with LLMs as explored in this paper.
 
@@ -55,22 +55,22 @@ As shown above, it constructs a document structure containing multiple levels of
 
 Additionally, we have developed a visualization tool to intuitively display the structure and content of the document, facilitating user understanding and exploration.
 
-## DDM Alignment with the ASKG Ontology
+## ASKG Ontology Expansion with DDM
 
-To integrate the Deep Document Model (DDM) into the Academic Knowledge Graph (ASKG), it is necessary to align the DDM with the ASKG ontology. The ASKG ontology provides a formal specification of the concepts, relationships, and properties relevant to the academic domain. By aligning DDM with the ASKG ontology, we ensure that the structured representation of the documents is compatible with the existing knowledge graph, enabling seamless integration and interoperability.
+This section describes the inclusion of the DDM into the ASKG ontology. The ASKG ontology formally specifies the concepts, relationships, and properties relevant to the academic domain, especially academic papers. By incorporating the DDM into the ASKG ontology, we ensure that the structured representation of the documents is compatible with the existing knowledge graph, enabling seamless integration and interoperability.
 
-The alignment process involves mapping the elements and structure of DDM to the corresponding classes and properties defined in the ASKG ontology. This mapping establishes a semantic correspondence between the DDM representation and the ontology, allowing for the integration of the extracted information into the knowledge graph.
+This process involves defining the elements and structure of the DDM with corresponding classes and properties described in the ASKG ontology. In this manner, a semantic correspondence between the DDM representation and the ontology is established, allowing for the integration of the extracted information into the knowledge graph.
 
-The following is enriched ontology after applying DDM:
+The following concept map depicts the enriched ASKG ontology after including the DDM aligned with the DOMO ontology:
 ![DDM_Pipeline](docs/revised_onto.jpg)
 
-This illustrates the ontological representation of DDM's structure. The main classes from the ASKG ontology, such as Paper, Section, Paragraph, and Sentence, are aligned with the corresponding elements in DDM. The hierarchical relationships, such as "hasSection", "hasParagraph", and "hasSentence", are used to represent the containment structure. The attributes, such as the title of a paper or the text of a sentence, are mapped to the appropriate properties in the ontology. 
+This illustrates the ontological representation of DDM's structure. The main classes from the ASKG ontology, such as `Paper`, `Section`, `Paragraph`, and `Sentence`, are aligned with the corresponding elements in the DDM. The hierarchical relationships, such as `hasSection`, `hasParagraph`, and `hasSentence`, are used to represent the containment structure. The attributes, such as the title of a paper or the text of a sentence, are mapped to the appropriate datatype properties in the ontology. 
 
 ## RDF Mapping
 
-To integrate the Deep Document Model (DDM) into the Academic Knowledge Graph (ASKG), the XML representation of DDM needs to be mapped to the Resource Description Framework (RDF) format. RDF is a standard model for representing structured data on the web and serves as the foundation for building knowledge graphs. By mapping DDM to RDF, we enable the integration of the extracted document information into the ASKG.
+To integrate the DDM into ASKG, the XML representation of DDM needs to be mapped to the RDF format representation of ASKG. RDF is a standard model for representing structured data on the web and serves as the foundation for building knowledge graphs based on the W3C Semantic Web technologies. By mapping DDM's XML to RDF, we enable the integration of the extracted document information into the ASKG.
 
-To facilitate the mapping process, we use the RDF Mapping Language (RML). RML is a declarative language that allows defining mapping rules to transform data from various formats into RDF. RML provides a flexible and expressive way to map the XML elements and attributes of DDM to RDF triples.
+To facilitate the mapping process, we use the [RDF Mapping Language (RML)](https://rml.io/specs/rml/). RML is a declarative language that allows defining mapping rules to transform data from various formats into RDF. RML provides a flexible and expressive way to map the XML elements and attributes of DDM to RDF triples.
 
 ```turtle
 @prefix askg: <http://example.org/askg/> .
@@ -96,7 +96,7 @@ askg:Reference1 rdf:type askg:Reference ;
   askg:referenceId "1"^^xsd:string .
 ```
 
-By mapping DDM to RDF using RML, we transform the hierarchical structure of DDM into a graph-based representation that can be seamlessly integrated into the ASKG. The resulting RDF data enables efficient querying, reasoning, and knowledge discovery over the integrated document information.
+By mapping DDM's XML representation to RDF using RML, we transform DDM's hierarchical structure into a graph-based representation that can be seamlessly integrated into the ASKG. The resulting RDF data enables efficient querying, reasoning, and knowledge discovery over the integrated document information.
 
 ## Enriched ASKG Ontology
 ![DDM_Pipeline](docs/ontology.jpg)
