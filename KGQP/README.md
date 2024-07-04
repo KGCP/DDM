@@ -24,7 +24,9 @@ The cosine similarity between each text chunk and the query was computed. The to
 4.Query Answering:
 The selected text chunks were used as context, and the Llama2 model was employed to answer user queries solely based on the selected context, without using any external data.
 
-## Knowledge Graph-enhanced Query Processing (KGQP)
+## Knowledge Graph-enhanced Query Processing (KGQP) Pipeline
+
+![Experiment_Pipeline_numbered](docs/LLM_Interact_Flow_Chart_numbered.png)
 
 1.Knowledge Graph Construction:
 The PARSE+DDM method was used to create a knowledge graph (.ttl file) from the ten scientific articles, containing information derived from the decomposed articles.
