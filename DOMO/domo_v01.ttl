@@ -1,0 +1,226 @@
+@prefix : <http://data.anu.edu.au/def/ont/domo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix domo: <http://data.anu.edu.au/def/ont/domo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <http://data.anu.edu.au/def/ont/domo> .
+
+<http://data.anu.edu.au/def/ont/domo> rdf:type owl:Ontology ;
+                                       owl:versionIRI <http://data.anu.edu.au/def/ont/domo/0.1> ;
+                                       dc:creator "Sergio J. Rodriguez Mendez" ;
+                                       owl:versionInfo "0.1"@en ;
+                                       vann:preferredNamespaceUri "http://data.anu.edu.au/def/ont/domo#"^^xsd:anyURI ;
+                                       rdfs:label "Document Object Model Ontology."@en ;
+                                       dcterms:created "2020-03-19"^^xsd:date ;
+                                       vann:preferredNamespacePrefix "domo"@en ;
+                                       dcterms:modified "2020-04-03"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#example
+skos:example rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://data.anu.edu.au/def/ont/domo#composedBy
+domo:composedBy rdf:type owl:ObjectProperty ;
+                rdfs:domain domo:DocumentModelObject ;
+                rdfs:range domo:DocumentModelComponent .
+
+
+###  http://data.anu.edu.au/def/ont/domo#contains
+domo:contains rdf:type owl:ObjectProperty ;
+              rdfs:domain domo:DocumentModelContainer ;
+              rdfs:range domo:DocumentModelComponent .
+
+
+###  http://data.anu.edu.au/def/ont/domo#defines
+domo:defines rdf:type owl:ObjectProperty ;
+             rdfs:domain domo:Model ;
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( domo:DocumentModelElement
+                                        domo:DocumentModelStructuralItem
+                                      )
+                        ] .
+
+
+###  http://data.anu.edu.au/def/ont/domo#hasMethod
+domo:hasMethod rdf:type owl:ObjectProperty ;
+               rdfs:domain domo:DocumentModelComponent ;
+               rdfs:range domo:DocumentModelMethod .
+
+
+###  http://data.anu.edu.au/def/ont/domo#hasProperty
+domo:hasProperty rdf:type owl:ObjectProperty ;
+                 rdfs:domain domo:DocumentModelComponent ;
+                 rdfs:range domo:DocumentModelProperty .
+
+
+###  http://data.anu.edu.au/def/ont/domo#hasValue
+domo:hasValue rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( domo:DocumentModelMethod
+                                          domo:DocumentModelProperty
+                                        )
+                          ] ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( domo:Content
+                                         domo:DocumentModelComponent
+                                       )
+                         ] ;
+              rdfs:comment "This object property \"gives access\" to a set of components or content items."@en .
+
+
+###  http://data.anu.edu.au/def/ont/domo#modeledAs
+domo:modeledAs rdf:type owl:ObjectProperty ;
+               rdfs:domain domo:DocumentModelElement ;
+               rdfs:range domo:DocumentModelComponent .
+
+
+###  http://data.anu.edu.au/def/ont/domo#modeledBy
+domo:modeledBy rdf:type owl:ObjectProperty ;
+               rdfs:domain domo:Document ;
+               rdfs:range domo:Model .
+
+
+###  http://schema.org/about
+<http://schema.org/about> rdf:type owl:ObjectProperty ;
+                          rdfs:domain domo:Document ;
+                          rdfs:range owl:Thing .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://data.anu.edu.au/def/ont/domo#keyword
+domo:keyword rdf:type owl:DatatypeProperty ;
+             rdfs:domain domo:Document ;
+             rdfs:range xsd:string .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( domo:Document
+                                     domo:DocumentModelStructuralItem
+                                     domo:Model
+                                   )
+                     ] ;
+         rdfs:range rdfs:Literal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://data.anu.edu.au/def/ont/domo#Binary
+domo:Binary rdf:type owl:Class ;
+            rdfs:subClassOf domo:Content .
+
+
+###  http://data.anu.edu.au/def/ont/domo#Content
+domo:Content rdf:type owl:Class ;
+             rdfs:subClassOf domo:DocumentModelStructuralItem .
+
+
+###  http://data.anu.edu.au/def/ont/domo#Document
+domo:Document rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty domo:modeledBy ;
+                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass domo:Model
+                              ] ;
+              skos:example """- Microsoft Word: a .docx document
+- Microsoft PowerPoint: a .pptx presentation
+- Microsoft Excel: a .xlsx spreadsheeet file
+- Adobe Acrobat: a .pdf document
+- Letter Template: the letter
+- .xml,
+- .json,
+..."""^^rdfs:Literal .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelComponent
+domo:DocumentModelComponent rdf:type owl:Class ;
+                            rdfs:subClassOf domo:DocumentModelStructuralItem .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelContainer
+domo:DocumentModelContainer rdf:type owl:Class ;
+                            rdfs:subClassOf domo:DocumentModelComponent ;
+                            rdfs:comment "A component holder."@en ;
+                            rdfs:label "Holder"@en ;
+                            skos:example """- Section.
+- Placeholder.
+- <html:div>"""^^rdfs:Literal .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelElement
+domo:DocumentModelElement rdf:type owl:Class ;
+                          rdfs:subClassOf domo:DocumentModelStructuralItem ;
+                          rdfs:comment "Atomic building block of the document."@en ;
+                          rdfs:label "Building Block"@en ;
+                          skos:example """- Microsoft Word (.docx): Page.
+- Microsoft PowerPoint (.pptx): Slide.
+- Microsoft Excel (.xslx): Workbook.
+- Adobe Acrobat (.pdf): Page.
+- Letter Template: Paragraph or Page.
+- .xml: element.
+- .json: element."""^^rdfs:Literal .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelMethod
+domo:DocumentModelMethod rdf:type owl:Class ;
+                         rdfs:subClassOf domo:DocumentModelStructuralItem .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelObject
+domo:DocumentModelObject rdf:type owl:Class ;
+                         rdfs:subClassOf domo:DocumentModelComponent .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelProperty
+domo:DocumentModelProperty rdf:type owl:Class ;
+                           rdfs:subClassOf domo:DocumentModelStructuralItem .
+
+
+###  http://data.anu.edu.au/def/ont/domo#DocumentModelStructuralItem
+domo:DocumentModelStructuralItem rdf:type owl:Class .
+
+
+###  http://data.anu.edu.au/def/ont/domo#Model
+domo:Model rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty domo:defines ;
+                             owl:someValuesFrom domo:DocumentModelElement
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty domo:defines ;
+                             owl:someValuesFrom domo:DocumentModelStructuralItem
+                           ] ;
+           rdfs:comment """\"Abstraction\".
+
+A <LETTER> can be modeled in different ways:
+1) Where the paragraphs are the elements.
+2) Where the pages are the elements."""@en ;
+           rdfs:label "Abstraction"@en .
+
+
+###  http://data.anu.edu.au/def/ont/domo#Text
+domo:Text rdf:type owl:Class ;
+          rdfs:subClassOf domo:Content .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
