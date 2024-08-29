@@ -26,7 +26,7 @@ The selected text chunks were used as context, and the Llama2 model was employed
 
 ## Knowledge Graph-enhanced Query Processing (KGQP) Pipeline
 
-![Experiment_Pipeline_numbered](docs/LLM_Interact_Flow_Chart_numbered.png)
+![Experiment_Pipeline_numbered](docs/LLM_Interact_Flow_Chart.png)
 
 The KGQP workflow's main steps involves:
 
