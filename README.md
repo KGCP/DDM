@@ -61,7 +61,7 @@ This section describes the inclusion of the DDM into the ASKG ontology. The ASKG
 
 This process involves defining the elements and structure of the DDM with corresponding classes and properties described in the ASKG ontology. In this manner, a semantic correspondence between the DDM representation and the ontology is established, allowing for the integration of the extracted information into the knowledge graph.
 
-The concept map below shows the enriched ASKG ontology after including the DDM.  The ontological representation of DDM's structure is aligned with the Document Object Model Ontology ([DOMO](DOMO)):
+The concept map below shows the enriched ASKG ontology after including the DDM.  The ontological representation of DDM's structure is aligned with the **Document Object Model Ontology** ([DOMO](DOMO)):
 ![DDM_Pipeline](docs/revised_onto.jpg)
 
 This illustrates the ontological representation of DDM's structure. The main classes from the ASKG ontology, such as `Paper`, `Section`, `Paragraph`, and `Sentence`, are aligned with the corresponding elements in the DDM. The hierarchical relationships, such as `hasSection`, `hasParagraph`, and `hasSentence`, are used to represent the containment structure. The attributes, such as the title of a paper or the text of a sentence, are mapped to the appropriate datatype properties in the ontology. 
